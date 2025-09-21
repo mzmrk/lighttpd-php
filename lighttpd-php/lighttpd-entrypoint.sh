@@ -24,5 +24,5 @@ ERROR_PREFIX=$(printf '\033[31m[error]\033[0m  ')
     done
 ) | sed -u "s/^/${ERROR_PREFIX}/" &
 
-# Drop privileges to www-data before launching Lighttpd in foreground mode
+# Launch Lighttpd in foreground mode
 exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
