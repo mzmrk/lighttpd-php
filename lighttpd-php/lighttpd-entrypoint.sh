@@ -16,7 +16,6 @@ ERROR_PREFIX=$(printf '\033[31m[error]\033[0m  ')
         cat "$ACCESS_PIPE"
     done
 ) | sed -u "s/^/${ACCESS_PREFIX}/" &
-ACCESS_TAIL_PID=$!
 
 # Stream error log entries with a red prefix
 (
@@ -24,7 +23,6 @@ ACCESS_TAIL_PID=$!
         cat "$ERROR_PIPE"
     done
 ) | sed -u "s/^/${ERROR_PREFIX}/" &
-ERROR_TAIL_PID=$!
 
 # Drop privileges to www-data before launching Lighttpd in foreground mode
 exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
