@@ -26,8 +26,5 @@ ACCESS_TAIL_PID=$!
 ) | sed -u "s/^/${ERROR_PREFIX}/" &
 ERROR_TAIL_PID=$!
 
-# Ensure background tailers exit cleanly when the container stops
-trap 'kill $ACCESS_TAIL_PID $ERROR_TAIL_PID 2>/dev/null' INT TERM EXIT
-
 # Drop privileges to www-data before launching Lighttpd in foreground mode
 exec lighttpd -D -f /etc/lighttpd/lighttpd.conf
